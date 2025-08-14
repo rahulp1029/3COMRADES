@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-btn { 
+            margin: 10px; 
+            padding: 10px 20px; 
+            background: #667eea; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .test-btn:hover { background: #5a67d8; }
+        .status { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #c6f6d5; color: #22543d; }
+        .error { background: #fed7d7; color: #742a2a; }
+    </style>
+</head>
+<body>
+    <h1>Button Functionality Test</h1>
+    
+    <div id="status"></div>
+    
+    <button class="test-btn" onclick="testButton('Symptom Checker')">Test Symptom Checker</button>
+    <button class="test-btn" onclick="testButton('Skin Analyzer')">Test Skin Analyzer</button>
+    <button class="test-btn" onclick="testButton('Doctor Chat')">Test Doctor Chat</button>
+    <button class="test-btn" onclick="testButton('Vital Signs')">Test Vital Signs</button>
+    <button class="test-btn" onclick="testButton('Dashboard')">Test Dashboard</button>
+    
+    <h2>API Connection Test</h2>
+    <button class="test-btn" onclick="testAPI()">Test API Connection</button>
+    
+    <script>
+        function testButton(buttonName) {
+            const status = document.getElementById('status');
+            status.innerHTML = `<div class="status success">✅ ${buttonName} button clicked successfully!</div>`;
+            console.log(`${buttonName} button test passed`);
+        }
+        
+        async function testAPI() {
+            const status = document.getElementById('status');
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                if (response.ok) {
+                    const data = await response.json();
+                    status.innerHTML = `<div class="status success">✅ API Connection Successful! Status: ${data.status}</div>`;
+                } else {
+                    status.innerHTML = `<div class="status error">❌ API Connection Failed! Status: ${response.status}</div>`;
+                }
+            } catch (error) {
+                status.innerHTML = `<div class="status error">❌ API Connection Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

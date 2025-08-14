@@ -335,65 +335,86 @@ html_content = """
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9I2PkPKZ5QdshzR5F5Jz4yU7W4I210W2D3/iYnE8jF5b5uT210S7B2D2G6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-      /* Global styles for the body and fonts */
-      body {
-          font-family: 'Inter', sans-serif;
-          scroll-behavior: smooth;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          min-height: 100vh;
-      }
-      .gradient-bg {
-          background-image: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
-      }
-      .bg-radial-gradient {
-        background-image: radial-gradient(at 50% 50%, #f1f5f9 0%, #fff 70%);
-      }
-      .glass-effect {
-          background: rgba(255, 255, 255, 0.25);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-      }
-      .card-hover {
-          transition: all 0.3s ease;
-          transform: translateY(0);
-      }
-      .card-hover:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      }
-      /* Keyframe animations for button effects */
-      @keyframes bubbleEffect {
-          0% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-          50% { transform: scale(1.05); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-          100% { transform: scale(1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-      }
-      .bubble-on-click {
-          animation: bubbleEffect 0.3s ease-in-out;
-      }
-      .chat-message-bubble {
-        max-width: 80%;
-      }
-      .feature-card {
-          background: rgba(255, 255, 255, 0.9);
-          border-radius: 20px;
-          padding: 2rem;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          transition: all 0.3s ease;
-      }
-      .feature-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-      }
-      .hero-gradient {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      }
-      .text-gradient {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-      }
+        /* Enhanced glass morphism effect */
+        .glass-effect {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Beautiful gradient backgrounds */
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .bg-radial-gradient {
+            background: radial-gradient(ellipse at center, #1e3a8a 0%, #1e40af 25%, #3b82f6 50%, #1d4ed8 75%, #1e3a8a 100%);
+        }
+        
+        /* Enhanced card effects */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Text gradients for better visibility */
+        .text-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Enhanced animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6); }
+        }
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        /* Mobile responsive improvements */
+        @media (max-width: 768px) {
+            .glass-effect {
+                padding: 1rem !important;
+            }
+            #nav-user-links {
+                display: none !important;
+                flex-direction: column !important;
+                position: absolute !important;
+                top: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(20px) !important;
+                padding: 1rem !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+                z-index: 10 !important;
+            }
+            #nav-user-links.show {
+                display: flex !important;
+            }
+            #nav-user-links button {
+                margin: 0.5rem 0 !important;
+                text-align: center !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-radial-gradient text-gray-800 antialiased min-h-screen flex flex-col overflow-x-hidden">
@@ -402,30 +423,86 @@ html_content = """
     <!-- Navigation Bar -->
     <!-- This section creates a fixed navigation bar with a logo and user-specific links. -->
     <!-- ============================================================================== -->
-    <nav class="glass-effect p-4 fixed top-0 w-full z-20">
+    <nav class="glass-effect p-6 fixed top-0 w-full z-20 border-b border-white border-opacity-20">
       <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo and Brand -->
         <div class="flex items-center space-x-8">
-          <button id="landing-btn" class="flex items-center text-2xl font-bold text-white hover:text-gray-200 transition-colors duration-300">
-            <i class="fa-solid fa-heart-pulse text-3xl mr-2 text-pink-300"></i>
-            HealthInsight
+          <button id="landing-btn" class="flex items-center text-3xl font-extrabold text-white hover:text-blue-200 transition-all duration-300 transform hover:scale-105">
+            <div class="relative">
+              <i class="fa-solid fa-heart-pulse text-4xl mr-3 text-blue-300 animate-pulse"></i>
+              <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+            </div>
+            <span class="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">HealthInsight</span>
           </button>
-          <div id="nav-user-links" class="hidden space-x-6 text-white font-medium">
-            <button id="dashboard-btn" class="hover:text-pink-300 transition-colors duration-300">Dashboard</button>
-            <button id="symptom-checker-btn" class="hover:text-pink-300 transition-colors duration-300">Symptom Checker</button>
-            <button id="skin-analyzer-btn" class="hover:text-pink-300 transition-colors duration-300">Skin Analyzer</button>
-            <button id="doctor-chat-btn" class="hover:text-pink-300 transition-colors duration-300">Talk to a Doctor</button>
-            <button id="shop-btn" class="hover:text-pink-300 transition-colors duration-300">Shop</button>
+          
+          <!-- Navigation Links -->
+          <div id="nav-user-links" class="flex space-x-8 text-white font-semibold">
+            <button id="dashboard-btn" class="relative group px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+              <span class="flex items-center">
+                <i class="fas fa-chart-line mr-2 text-blue-300"></i>
+                Dashboard
+              </span>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-300 group-hover:w-full transition-all duration-300"></div>
+            </button>
+            <button id="symptom-checker-btn" class="relative group px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+              <span class="flex items-center">
+                <i class="fas fa-stethoscope mr-2 text-blue-300"></i>
+                Symptom Checker
+              </span>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-300 group-hover:w-full transition-all duration-300"></div>
+            </button>
+            <button id="skin-analyzer-btn" class="relative group px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+              <span class="flex items-center">
+                <i class="fas fa-hand-holding-medical mr-2 text-blue-300"></i>
+                Skin Analyzer
+              </span>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-300 group-hover:w-full transition-all duration-300"></div>
+            </button>
+            <button id="doctor-chat-btn" class="relative group px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+              <span class="flex items-center">
+                <i class="fas fa-comments mr-2 text-blue-300"></i>
+                Talk to a Doctor
+              </span>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-300 group-hover:w-full transition-all duration-300"></div>
+            </button>
+            <button id="prescription-analyzer-btn" class="relative group px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+              <span class="flex items-center">
+                <i class="fas fa-prescription-bottle-medical mr-2 text-blue-300"></i>
+                Prescription Analyzer
+              </span>
+              <div class="absolute bottom-0 left-0 w-0 h-0 h-0.5 bg-blue-300 group-hover:w-full transition-all duration-300"></div>
+            </button>
+            <button id="shop-btn" class="relative group px-4 py-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+              <span class="flex items-center">
+                <i class="fas fa-shopping-cart mr-2 text-blue-300"></i>
+                Shop
+              </span>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-300 group-hover:w-full transition-all duration-300"></div>
+            </button>
           </div>
         </div>
-        <div id="nav-auth-buttons">
-            <div class="flex space-x-3">
-              <button id="login-nav-btn" class="bg-white bg-opacity-20 text-white font-bold py-2 px-6 rounded-full shadow-md hover:bg-opacity-30 transition-all duration-300 transform hover:scale-105 border border-white border-opacity-30">
-                Login
-              </button>
-              <button id="register-nav-btn" class="bg-white text-purple-600 font-bold py-2 px-6 rounded-full shadow-md hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
-                Register
-              </button>
-            </div>
+        
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="lg:hidden text-white p-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+        
+        <div id="nav-auth-buttons" class="flex items-center space-x-4">
+          <button id="login-nav-btn" class="relative overflow-hidden bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-white border-opacity-30 group">
+            <span class="relative z-10 flex items-center">
+              <i class="fas fa-sign-in-alt mr-2"></i>
+              Login
+            </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </button>
+          <button id="register-nav-btn" class="relative overflow-hidden bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 group">
+            <span class="relative z-10 flex items-center">
+              <i class="fas fa-user-plus mr-2"></i>
+              Register
+            </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute inset-0 bg-white opacity-90 group-hover:opacity-0 transition-opacity duration-300"></div>
+          </button>
         </div>
       </div>
     </nav>
@@ -434,22 +511,22 @@ html_content = """
         <div class="min-h-screen">
             <!-- Hero Section -->
             <div class="relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800"></div>
                 <div class="relative container mx-auto px-4 py-20">
                     <div class="grid lg:grid-cols-2 gap-16 items-center">
                         <div class="space-y-8 text-white">
                             <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
-                                Your Health, <span class="text-pink-300">Simplified</span>
+                                Your Health, <span class="text-blue-200">Simplified</span>
                             </h1>
-                            <p class="text-xl text-gray-200 leading-relaxed">
+                            <p class="text-xl text-blue-100 leading-relaxed">
                                 Experience the future of healthcare with AI-powered diagnostics, real-time monitoring, and personalized health insights. Your journey to better health starts here.
                             </p>
                             <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                                <button onclick="showFeature('symptom-checker')" class="bg-white text-purple-600 font-bold py-4 px-8 rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-lg">
+                                <button onclick="showFeature('symptom-checker')" class="bg-white text-blue-600 font-bold py-4 px-8 rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 text-lg">
                                     <i class="fas fa-stethoscope mr-2"></i>
                                     Check Symptoms
                                 </button>
-                                <button onclick="showFeature('doctor-chat')" class="border-2 border-white text-white font-bold py-4 px-8 rounded-full shadow-lg hover:bg-white hover:text-purple-600 transition-all duration-300 transform hover:scale-105 text-lg">
+                                <button onclick="showFeature('doctor-chat')" class="border-2 border-white text-white font-bold py-4 px-8 rounded-full shadow-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105 text-lg">
                                     <i class="fas fa-comments mr-2"></i>
                                     Chat with AI Doctor
                                 </button>
@@ -458,7 +535,7 @@ html_content = """
                         <div class="relative">
                             <div class="feature-card">
                                 <div class="text-center">
-                                    <i class="fas fa-robot text-6xl text-purple-500 mb-4"></i>
+                                    <i class="fas fa-robot text-6xl text-blue-500 mb-4"></i>
                                     <h3 class="text-2xl font-bold text-gray-800 mb-2">AI-Powered Health Assistant</h3>
                                     <p class="text-gray-600">Get instant health insights and recommendations</p>
                                 </div>
@@ -472,7 +549,7 @@ html_content = """
             <div class="container mx-auto px-4 py-20">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-white mb-4">Comprehensive Health Solutions</h2>
-                    <p class="text-xl text-gray-200">Everything you need for proactive health management</p>
+                    <p class="text-xl text-blue-100">Everything you need for proactive health management</p>
                 </div>
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
@@ -503,6 +580,16 @@ html_content = """
                             </div>
                             <h3 class="text-xl font-bold text-gray-800 mb-3">Vital Signs Monitor</h3>
                             <p class="text-gray-600">Track heart rate, blood pressure, oxygen levels, and more with AI analysis.</p>
+                        </div>
+                    </div>
+                    
+                    <div onclick="showFeature('prescription-analyzer')" class="feature-card card-hover cursor-pointer">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fa-solid fa-prescription-bottle-medical text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Prescription Analyzer</h3>
+                            <p class="text-gray-600">AI-powered analysis of medical prescriptions with detailed medication information and guidance.</p>
                         </div>
                     </div>
                     
@@ -540,20 +627,20 @@ html_content = """
                 <!-- Stats Section -->
                 <div class="grid md:grid-cols-4 gap-8 mb-16">
                     <div class="text-center text-white">
-                        <div class="text-4xl font-bold mb-2">99%</div>
-                        <div class="text-gray-200">Accuracy Rate</div>
+                        <div class="text-4xl font-bold mb-2 text-blue-200">99%</div>
+                        <div class="text-blue-100">Accuracy Rate</div>
                     </div>
                     <div class="text-center text-white">
-                        <div class="text-4xl font-bold mb-2">24/7</div>
-                        <div class="text-gray-200">Available</div>
+                        <div class="text-4xl font-bold mb-2 text-blue-200">24/7</div>
+                        <div class="text-blue-100">Available</div>
                     </div>
                     <div class="text-center text-white">
-                        <div class="text-4xl font-bold mb-2">10K+</div>
-                        <div class="text-gray-200">Users Served</div>
+                        <div class="text-4xl font-bold mb-2 text-blue-200">10K+</div>
+                        <div class="text-blue-100">Users Served</div>
                     </div>
                     <div class="text-center text-white">
-                        <div class="text-4xl font-bold mb-2">5min</div>
-                        <div class="text-gray-200">Average Response</div>
+                        <div class="text-4xl font-bold mb-2 text-blue-200">5min</div>
+                        <div class="text-blue-100">Average Response</div>
                     </div>
                 </div>
             </div>
@@ -586,12 +673,18 @@ html_content = """
         
         // Setup navigation functionality
         function setupNavigation() {
+            console.log('Setting up navigation...');
+            
             // Landing page button
             const landingBtn = document.getElementById('landing-btn');
             if (landingBtn) {
+                console.log('Landing button found and configured');
                 landingBtn.addEventListener('click', function() {
+                    console.log('Landing button clicked');
                     showFeature('landing');
                 });
+            } else {
+                console.error('Landing button not found');
             }
             
             // Navigation buttons
@@ -600,15 +693,20 @@ html_content = """
                 'symptom-checker-btn': 'symptom-checker',
                 'skin-analyzer-btn': 'skin-analyzer',
                 'doctor-chat-btn': 'doctor-chat',
+                'prescription-analyzer-btn': 'prescription-analyzer',
                 'shop-btn': 'shop'
             };
             
             Object.keys(navButtons).forEach(btnId => {
                 const btn = document.getElementById(btnId);
                 if (btn) {
+                    console.log(`Button ${btnId} found and configured`);
                     btn.addEventListener('click', function() {
+                        console.log(`Button ${btnId} clicked, showing feature: ${navButtons[btnId]}`);
                         showFeature(navButtons[btnId]);
                     });
+                } else {
+                    console.error(`Button ${btnId} not found`);
                 }
             });
             
@@ -627,14 +725,260 @@ html_content = """
                     showFeature('register');
                 });
             }
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navUserLinks = document.getElementById('nav-user-links');
+            
+            if (mobileMenuBtn && navUserLinks) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navUserLinks.classList.toggle('show');
+                    console.log('Mobile menu toggled');
+                });
+            }
         }
         
+        // Load dashboard data
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('http://localhost:8000/api/dashboard/test-user-123');
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Dashboard data loaded:', data);
+                    // Update dashboard content if needed
+                } else {
+                    console.error('Failed to load dashboard data');
+                }
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+            }
+        }
+
+        // Create Login Form
+        function createLoginForm() {
+            return `
+                <div class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 flex items-center justify-center px-4">
+                    <div class="max-w-md w-full">
+                        <div class="glass-effect p-8 rounded-2xl shadow-2xl">
+                            <div class="text-center mb-8">
+                                <h2 class="text-3xl font-bold text-white mb-2">Welcome Back</h2>
+                                <p class="text-blue-200">Sign in to your HealthInsight account</p>
+                            </div>
+                            <form id="login-form" class="space-y-6">
+                                <div>
+                                    <label class="block text-white text-sm font-medium mb-2">Email</label>
+                                    <input type="email" id="login-email" required 
+                                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                           placeholder="Enter your email">
+                                </div>
+                                <div>
+                                    <label class="block text-white text-sm font-medium mb-2">Password</label>
+                                    <input type="password" id="login-password" required 
+                                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                           placeholder="Enter your password">
+                                </div>
+                                <button type="submit" 
+                                        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                                    Sign In
+                                </button>
+                            </form>
+                            <div class="text-center mt-6">
+                                <p class="text-blue-200">Don't have an account? 
+                                    <button onclick="showFeature('register')" class="text-blue-300 hover:text-blue-200 font-medium">Sign up</button>
+                                </p>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button onclick="showFeature('landing')" class="text-blue-300 hover:text-white text-sm">
+                                    ← Back to Home
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Register Form
+        function createRegisterForm() {
+            return `
+                <div class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 flex items-center justify-center px-4">
+                    <div class="max-w-md w-full">
+                        <div class="glass-effect p-8 rounded-2xl shadow-2xl">
+                            <div class="text-center mb-8">
+                                <h2 class="text-3xl font-bold text-white mb-2">Create Account</h2>
+                                <p class="text-blue-200">Join HealthInsight for better health</p>
+                            </div>
+                            <form id="register-form" class="space-y-6">
+                                <div>
+                                    <label class="block text-white text-sm font-medium mb-2">Full Name</label>
+                                    <input type="text" id="register-name" required 
+                                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                           placeholder="Enter your full name">
+                                </div>
+                                <div>
+                                    <label class="block text-white text-sm font-medium mb-2">Email</label>
+                                    <input type="email" id="register-email" required 
+                                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                           placeholder="Enter your email">
+                                </div>
+                                <div>
+                                    <label class="block text-white text-sm font-medium mb-2">Password</label>
+                                    <input type="password" id="register-password" required 
+                                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                           placeholder="Create a password">
+                                </div>
+                                <div>
+                                    <label class="block text-white text-sm font-medium mb-2">Confirm Password</label>
+                                    <input type="password" id="register-confirm-password" required 
+                                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                           placeholder="Confirm your password">
+                                </div>
+                                <button type="submit" 
+                                        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                                    Create Account
+                                </button>
+                            </form>
+                            <div class="text-center mt-6">
+                                <p class="text-blue-200">Already have an account? 
+                                    <button onclick="showFeature('login')" class="text-blue-300 hover:text-blue-200 font-medium">Sign in</button>
+                                </p>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button onclick="showFeature('landing')" class="text-blue-300 hover:text-white text-sm">
+                                    ← Back to Home
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create Dashboard Page
+        function createDashboardPage() {
+            return `
+                <div class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 pt-20">
+                    <div class="container mx-auto px-4 py-8">
+                        <div class="text-center mb-12">
+                            <h1 class="text-4xl font-bold text-white mb-4">Your Health Dashboard</h1>
+                            <p class="text-xl text-blue-200">Monitor your health metrics and insights</p>
+                        </div>
+                        
+                        <!-- Health Summary Cards -->
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <div class="glass-effect p-6 rounded-xl text-center">
+                                <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-heart-pulse text-2xl text-white"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-white mb-2">Heart Rate</h3>
+                                <p class="text-3xl font-bold text-green-400">72 BPM</p>
+                                <p class="text-sm text-blue-200">Normal Range</p>
+                            </div>
+                            
+                            <div class="glass-effect p-6 rounded-xl text-center">
+                                <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-thermometer-half text-2xl text-white"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-white mb-2">Temperature</h3>
+                                <p class="text-3xl font-bold text-blue-400">98.6°F</p>
+                                <p class="text-sm text-blue-200">Normal</p>
+                            </div>
+                            
+                            <div class="glass-effect p-6 rounded-xl text-center">
+                                <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-lungs text-2xl text-white"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-white mb-2">Oxygen</h3>
+                                <p class="text-3xl font-bold text-purple-400">98%</p>
+                                <p class="text-sm text-blue-200">Excellent</p>
+                            </div>
+                            
+                            <div class="glass-effect p-6 rounded-xl text-center">
+                                <div class="w-16 h-16 bg-gradient-to-r from-pink-400 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-weight text-2xl text-white"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-white mb-2">Weight</h3>
+                                <p class="text-3xl font-bold text-pink-400">68 kg</p>
+                                <p class="text-sm text-blue-200">Stable</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <div onclick="showFeature('symptom-checker')" class="glass-effect p-6 rounded-xl cursor-pointer hover:bg-white hover:bg-opacity-10 transition-all duration-300">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-r from-red-400 to-red-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-stethoscope text-xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Check Symptoms</h3>
+                                        <p class="text-blue-200 text-sm">Get AI diagnosis</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div onclick="showFeature('vital-signs')" class="glass-effect p-6 rounded-xl cursor-pointer hover:bg-white hover:bg-opacity-10 transition-all duration-300">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-chart-line text-xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Track Vitals</h3>
+                                        <p class="text-blue-200 text-sm">Monitor health metrics</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div onclick="showFeature('doctor-chat')" class="glass-effect p-6 rounded-xl cursor-pointer hover:bg-white hover:bg-opacity-10 transition-all duration-300">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-comments text-xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">AI Doctor</h3>
+                                        <p class="text-blue-200 text-sm">Get medical advice</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div onclick="showFeature('prescription-analyzer')" class="glass-effect p-6 rounded-xl cursor-pointer hover:bg-white hover:bg-opacity-10 transition-all duration-300">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-prescription-bottle-medical text-xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Analyze Prescription</h3>
+                                        <p class="text-blue-200 text-sm">Get medication details</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Back to Home Button -->
+                        <div class="text-center">
+                            <button onclick="showFeature('landing')" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-all duration-300">
+                                ← Back to Home
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         // Enhanced feature display function with full functionality
         function showFeature(feature) {
+            console.log(`showFeature called with: ${feature}`);
             const appRoot = document.getElementById('app-root');
+            if (!appRoot) {
+                console.error('app-root element not found');
+                return;
+            }
             let content = '';
             
             switch(feature) {
+                case 'dashboard':
+                    content = createDashboardPage();
+                    break;
                 case 'symptom-checker':
                     content = createSymptomCheckerForm();
                     break;
@@ -665,8 +1009,17 @@ html_content = """
                 case 'voice-assistant':
                     content = createVoiceAssistantPage();
                     break;
+                case 'prescription-analyzer':
+                    content = createPrescriptionAnalyzerPage();
+                    break;
                 case 'shop':
                     content = createShopPage();
+                    break;
+                case 'login':
+                    content = createLoginForm();
+                    break;
+                case 'register':
+                    content = createRegisterForm();
                     break;
                 case 'landing':
                 default:
@@ -701,6 +1054,10 @@ html_content = """
                     const form = document.getElementById('vital-signs-form');
                     if (form) form.addEventListener('submit', handleVitalSigns);
                 }, 100);
+            } else if (feature === 'prescription-analyzer') {
+                setTimeout(() => {
+                    setupPrescriptionAnalyzer();
+                }, 100);
             } else if (feature === 'mental-health') {
                 setTimeout(() => {
                     const form = document.getElementById('mental-health-form');
@@ -721,6 +1078,10 @@ html_content = """
             } else if (feature === 'health-predictions') {
                 setTimeout(() => {
                     loadHealthPredictions();
+                }, 100);
+            } else if (feature === 'dashboard') {
+                setTimeout(() => {
+                    loadDashboardData();
                 }, 100);
             } else if (feature === 'voice-assistant') {
                 setTimeout(() => {
@@ -1271,48 +1632,193 @@ html_content = """
             `;
         }
 
-        function createShopPage() {
+        // Create Prescription Analyzer Page
+        function createPrescriptionAnalyzerPage() {
             return `
-                <div class="min-h-screen flex items-center justify-center p-4">
-                    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-6xl w-full">
-                        <h2 class="text-3xl font-bold text-blue-600 mb-6 text-center">Health & Wellness Shop</h2>
-                        <div class="grid md:grid-cols-3 gap-6">
-                            <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                                <div class="text-center mb-4">
-                                    <i class="fas fa-heart-pulse text-4xl text-red-500 mb-3"></i>
-                                    <h3 class="text-xl font-semibold text-gray-800">Vital Signs Monitor</h3>
-                                    <p class="text-gray-600 text-sm mt-2">Advanced home monitoring device</p>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-2xl font-bold text-blue-600 mb-3">$199.99</p>
-                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">Add to Cart</button>
-                                </div>
+                <div class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 pt-20">
+                    <div class="container mx-auto px-4 py-8">
+                        <div class="text-center mb-12">
+                            <h1 class="text-4xl font-bold text-white mb-4">AI Prescription Analyzer</h1>
+                            <p class="text-xl text-blue-200">Upload your prescription for AI-powered analysis and detailed medication information</p>
+                        </div>
+                        
+                        <div class="max-w-4xl mx-auto">
+                            <!-- Upload Section -->
+                            <div class="glass-effect p-8 rounded-2xl mb-8">
+                                <h2 class="text-2xl font-bold text-white mb-6 text-center">Upload Prescription</h2>
+                                <form id="prescription-form" class="space-y-6">
+                                    <div class="text-center">
+                                        <div class="border-2 border-dashed border-white border-opacity-30 rounded-lg p-8 hover:border-opacity-50 transition-all duration-300">
+                                            <i class="fas fa-prescription-bottle-medical text-4xl text-white mb-4"></i>
+                                            <p class="text-white text-lg mb-2">Drop your prescription image here</p>
+                                            <p class="text-blue-200 text-sm mb-4">or click to browse</p>
+                                            <input type="file" id="prescription-image" accept="image/*" class="hidden">
+                                            <button type="button" onclick="document.getElementById('prescription-image').click()" 
+                                                    class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-all duration-300">
+                                                Choose Image
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="image-preview" class="hidden text-center">
+                                        <img id="preview-img" class="max-w-md mx-auto rounded-lg shadow-lg" alt="Prescription Preview">
+                                        <button type="button" onclick="removeImage()" class="mt-4 text-red-400 hover:text-red-300">
+                                            <i class="fas fa-times mr-2"></i>Remove Image
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="text-center">
+                                        <button type="submit" id="analyze-btn" disabled
+                                                class="bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold py-4 px-8 rounded-full hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                                            <i class="fas fa-search mr-2"></i>
+                                            Analyze Prescription
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                                <div class="text-center mb-4">
-                                    <i class="fas fa-pills text-4xl text-green-500 mb-3"></i>
-                                    <h3 class="text-xl font-semibold text-gray-800">Smart Pill Organizer</h3>
-                                    <p class="text-gray-600 text-sm mt-2">Automated medication reminder system</p>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-2xl font-bold text-blue-600 mb-3">$89.99</p>
-                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">Add to Cart</button>
-                                </div>
-                            </div>
-                            <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-                                <div class="text-center mb-4">
-                                    <i class="fas fa-brain text-4xl text-purple-500 mb-3"></i>
-                                    <h3 class="text-xl font-semibold text-gray-800">Mental Health App</h3>
-                                    <p class="text-gray-600 text-sm mt-2">Premium subscription for advanced features</p>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-2xl font-bold text-blue-600 mb-3">$9.99/month</p>
-                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">Subscribe</button>
+                            
+                            <!-- Analysis Results -->
+                            <div id="analysis-results" class="hidden">
+                                <div class="glass-effect p-8 rounded-2xl">
+                                    <h2 class="text-2xl font-bold text-white mb-6 text-center">Prescription Analysis Results</h2>
+                                    
+                                    <!-- Patient Information -->
+                                    <div class="mb-8">
+                                        <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                            <i class="fas fa-user mr-3 text-blue-300"></i>
+                                            Patient Information
+                                        </h3>
+                                        <div class="grid md:grid-cols-2 gap-4">
+                                            <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                                                <p class="text-blue-200 text-sm">Patient Name</p>
+                                                <p class="text-white font-semibold" id="patient-name">-</p>
+                                            </div>
+                                            <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                                                <p class="text-blue-200 text-sm">Prescribing Doctor</p>
+                                                <p class="text-white font-semibold" id="doctor-name">-</p>
+                                            </div>
+                                            <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                                                <p class="text-blue-200 text-sm">Prescription Date</p>
+                                                <p class="text-white font-semibold" id="prescription-date">-</p>
+                                            </div>
+                                            <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                                                <p class="text-blue-200 text-sm">Pharmacy</p>
+                                                <p class="text-white font-semibold" id="pharmacy">-</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Medications -->
+                                    <div class="mb-8">
+                                        <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                            <i class="fas fa-pills mr-3 text-blue-300"></i>
+                                            Medications
+                                        </h3>
+                                        <div id="medications-list" class="space-y-4">
+                                            <!-- Medications will be populated here -->
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Instructions -->
+                                    <div class="mb-8">
+                                        <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                            <i class="fas fa-clipboard-list mr-3 text-blue-300"></i>
+                                            Additional Instructions
+                                        </h3>
+                                        <div class="bg-white bg-opacity-10 p-4 rounded-lg">
+                                            <p class="text-white" id="instructions">-</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Safety Information -->
+                                    <div class="mb-8">
+                                        <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                            <i class="fas fa-shield-alt mr-3 text-blue-300"></i>
+                                            Safety Information
+                                        </h3>
+                                        <div class="bg-yellow-500 bg-opacity-20 border border-yellow-500 border-opacity-30 p-4 rounded-lg">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-exclamation-triangle text-yellow-400 mt-1 mr-3"></i>
+                                                <div>
+                                                    <p class="text-yellow-200 font-semibold mb-2">Important Disclaimer</p>
+                                                    <p class="text-yellow-100 text-sm">
+                                                        This AI analysis is for informational purposes only and should not replace professional medical advice. 
+                                                        Always consult with your healthcare provider or pharmacist for personalized medical guidance, 
+                                                        especially regarding dosage, side effects, and drug interactions.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Back Button -->
+                                    <div class="text-center">
+                                        <button onclick="showFeature('landing')" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-all duration-300">
+                                            ← Back to Home
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-8 text-center">
-                            <button onclick="showFeature('landing')" class="text-blue-600 hover:underline">← Back to Home</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createShopPage() {
+            return `
+                <div class="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 pt-20">
+                    <div class="container mx-auto px-4 py-8">
+                        <div class="text-center mb-12">
+                            <h1 class="text-4xl font-bold text-white mb-4">Health & Wellness Shop</h1>
+                            <p class="text-xl text-blue-200">Discover products for your health journey</p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="glass-effect p-6 rounded-xl">
+                                <div class="text-center">
+                                    <div class="w-24 h-24 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-pills text-3xl text-white"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Vitamins & Supplements</h3>
+                                    <p class="text-blue-200 mb-4">Essential nutrients for optimal health</p>
+                                    <button class="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300">
+                                        Shop Now
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="glass-effect p-6 rounded-xl">
+                                <div class="text-center">
+                                    <div class="w-24 h-24 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-dumbbell text-3xl text-white"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Fitness Equipment</h3>
+                                    <p class="text-blue-200 mb-4">Tools for your workout routine</p>
+                                    <button class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300">
+                                        Shop Now
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="glass-effect p-6 rounded-xl">
+                                <div class="text-center">
+                                    <div class="w-24 h-24 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <i class="fas fa-apple-alt text-3xl text-white"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Healthy Foods</h3>
+                                    <p class="text-blue-200 mb-4">Nutritious meals and snacks</p>
+                                    <button class="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all duration-300">
+                                        Shop Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-8">
+                            <button onclick="showFeature('landing')" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-all duration-300">
+                                ← Back to Home
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1963,6 +2469,179 @@ html_content = """
                 health_trend: 'stable',
                 next_checkup: '3 months'
             };
+        }
+
+        // Prescription Analyzer Functions
+        function setupPrescriptionAnalyzer() {
+            const imageInput = document.getElementById('prescription-image');
+            const analyzeBtn = document.getElementById('analyze-btn');
+            
+            if (imageInput) {
+                imageInput.addEventListener('change', handlePrescriptionImageSelect);
+            }
+            
+            if (analyzeBtn) {
+                analyzeBtn.addEventListener('click', handlePrescriptionAnalysis);
+            }
+        }
+
+        function handlePrescriptionImageSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewImg = document.getElementById('preview-img');
+                    const imagePreview = document.getElementById('image-preview');
+                    const analyzeBtn = document.getElementById('analyze-btn');
+                    
+                    previewImg.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                    analyzeBtn.disabled = false;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeImage() {
+            const imageInput = document.getElementById('prescription-image');
+            const imagePreview = document.getElementById('image-preview');
+            const analyzeBtn = document.getElementById('analyze-btn');
+            
+            imageInput.value = '';
+            imagePreview.classList.add('hidden');
+            analyzeBtn.disabled = true;
+        }
+
+        async function handlePrescriptionAnalysis() {
+            const imageInput = document.getElementById('prescription-image');
+            const imageFile = imageInput.files[0];
+            
+            if (!imageFile) {
+                showModal('Please select a prescription image to analyze.');
+                return;
+            }
+
+            try {
+                // Show loading state
+                const analyzeBtn = document.getElementById('analyze-btn');
+                analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Analyzing...';
+                analyzeBtn.disabled = true;
+
+                // Convert image to base64
+                const base64Image = await convertImageToBase64(imageFile);
+                
+                // Call FastAPI backend
+                const response = await fetch('http://localhost:8000/api/analyze-prescription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: 'user_' + Date.now(),
+                        image_data: base64Image
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to analyze prescription');
+                }
+
+                const data = await response.json();
+                displayPrescriptionResults(data.analysis);
+                
+                // Reset button
+                analyzeBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Analyze Prescription';
+                analyzeBtn.disabled = false;
+                
+            } catch (error) {
+                console.error('Prescription analysis error:', error);
+                showModal(`Error: ${error.message}. Please try again.`);
+                
+                // Reset button
+                const analyzeBtn = document.getElementById('analyze-btn');
+                analyzeBtn.innerHTML = '<i class="fas fa-search mr-2"></i>Analyze Prescription';
+                analyzeBtn.disabled = false;
+            }
+        }
+
+        function displayPrescriptionResults(analysis) {
+            // Update patient information
+            document.getElementById('patient-name').textContent = analysis.patient.name;
+            document.getElementById('doctor-name').textContent = analysis.patient.doctor;
+            document.getElementById('prescription-date').textContent = analysis.patient.date;
+            document.getElementById('pharmacy').textContent = analysis.patient.pharmacy;
+            
+            // Update instructions
+            document.getElementById('instructions').textContent = analysis.general_instructions;
+            
+            // Populate medications list
+            const medicationsList = document.getElementById('medications-list');
+            medicationsList.innerHTML = '';
+            
+            analysis.medications.forEach((med, index) => {
+                const medCard = document.createElement('div');
+                medCard.className = 'glass-effect p-6 rounded-xl';
+                medCard.innerHTML = `
+                    <div class="flex items-start justify-between mb-4">
+                        <h4 class="text-lg font-semibold text-white">${med.name}</h4>
+                        <span class="bg-pink-500 text-white px-3 py-1 rounded-full text-sm">${med.classification}</span>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p class="text-gray-300 text-sm">Dosage</p>
+                            <p class="text-white font-semibold">${med.dosage}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-300 text-sm">Frequency</p>
+                            <p class="text-white font-semibold">${med.frequency}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-300 text-sm">Duration</p>
+                            <p class="text-white font-semibold">${med.duration}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-300 text-sm">Indication</p>
+                            <p class="text-white font-semibold">${med.indication}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <p class="text-gray-300 text-sm mb-2">Side Effects</p>
+                            <ul class="text-white text-sm space-y-1">
+                                ${med.side_effects.map(effect => `<li>• ${effect}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="text-gray-300 text-sm mb-2">Contraindications</p>
+                            <ul class="text-white text-sm space-y-1">
+                                ${med.contraindications.map(contra => `<li>• ${contra}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="text-gray-300 text-sm mb-2">Interactions</p>
+                            <ul class="text-white text-sm space-y-1">
+                                ${med.interactions.map(interaction => `<li>• ${interaction}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    ${med.instructions ? `
+                    <div class="mt-4 p-3 bg-blue-500 bg-opacity-20 rounded-lg">
+                        <p class="text-blue-200 text-sm font-semibold mb-1">Special Instructions:</p>
+                        <p class="text-blue-100 text-sm">${med.instructions}</p>
+                    </div>
+                    ` : ''}
+                `;
+                medicationsList.appendChild(medCard);
+            });
+            
+            // Show results
+            document.getElementById('analysis-results').classList.remove('hidden');
+            
+            // Scroll to results
+            document.getElementById('analysis-results').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>

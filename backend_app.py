@@ -57,6 +57,10 @@ class VitalSignsRequest(BaseModel):
     oxygen_saturation: Optional[float] = None
     respiratory_rate: Optional[float] = None
 
+class PrescriptionAnalysisRequest(BaseModel):
+    user_id: str
+    image_data: str
+
 # In-memory storage
 in_memory_db = {}
 in_memory_auth = {}
@@ -100,15 +104,72 @@ def simulate_skin_analysis(image_data: str) -> dict:
     ]
     return conditions[hash(image_data) % len(conditions)]
 
-def simulate_doctor_response(message: str) -> str:
-    """Simulate AI doctor response"""
-    time.sleep(0.8)
+def simulate_doctor_response(message: str) -> dict:
+    """Simulate doctor response"""
+    time.sleep(1)
     responses = [
-        "I understand your concern. Please consult a healthcare provider for proper evaluation. I am an AI assistant.",
-        "That's an interesting question. While I can provide general information, please consult a qualified professional.",
-        "I'm here to help with general health information. For specific concerns, consult your healthcare provider."
+        {
+            "response": "Based on your symptoms, I recommend monitoring your condition and consulting a healthcare provider if symptoms persist or worsen.",
+            "confidence": 0.85,
+            "disclaimer": "This is general advice. Consult a healthcare provider for personalized care."
+        },
+        {
+            "response": "Your symptoms suggest a common condition that typically resolves with rest and proper care. However, if you experience severe symptoms, seek immediate medical attention.",
+            "confidence": 0.78,
+            "disclaimer": "This is general advice. Consult a healthcare provider for personalized care."
+        }
     ]
     return responses[hash(message) % len(responses)]
+
+def simulate_prescription_analysis(image_data: str) -> dict:
+    """Simulate prescription analysis using AI/OCR"""
+    time.sleep(2)  # Simulate AI processing time
+    
+    # Simulate extracted prescription data
+    analysis = {
+        "patient": {
+            "name": "John Doe",
+            "doctor": "Dr. Sarah Johnson",
+            "date": "2024-01-15",
+            "pharmacy": "City Pharmacy"
+        },
+        "medications": [
+            {
+                "name": "Lisinopril",
+                "dosage": "10mg",
+                "frequency": "Once daily",
+                "duration": "30 days",
+                "classification": "ACE Inhibitor",
+                "indication": "High blood pressure",
+                "side_effects": ["Dizziness", "Dry cough", "Fatigue"],
+                "contraindications": ["Pregnancy", "Severe kidney disease"],
+                "interactions": ["NSAIDs", "Lithium", "Potassium supplements"],
+                "instructions": "Take as prescribed, preferably in the morning"
+            },
+            {
+                "name": "Metformin",
+                "dosage": "500mg",
+                "frequency": "Twice daily with meals",
+                "duration": "90 days",
+                "classification": "Biguanide",
+                "indication": "Type 2 diabetes",
+                "side_effects": ["Nausea", "Diarrhea", "Stomach upset"],
+                "contraindications": ["Severe kidney disease", "Metabolic acidosis"],
+                "interactions": ["Alcohol", "Contrast dye", "Furosemide"],
+                "instructions": "Take with food to minimize stomach upset"
+            }
+        ],
+        "general_instructions": "Take medications as prescribed. Monitor blood pressure and blood sugar regularly. Report any unusual side effects to your doctor immediately.",
+        "safety_warnings": [
+            "Do not stop taking medications without consulting your doctor",
+            "Keep medications out of reach of children",
+            "Store in a cool, dry place",
+            "Check expiration dates regularly"
+        ],
+        "disclaimer": "This AI analysis is for informational purposes only. Always consult your healthcare provider or pharmacist for personalized medical advice, especially regarding dosage, side effects, and drug interactions."
+    }
+    
+    return analysis
 
 def analyze_vital_signs(vital_data: dict) -> dict:
     """Analyze vital signs"""
@@ -183,15 +244,52 @@ async def analyze_skin_condition(request: SkinAnalysisRequest):
 
 @app.post("/api/chat-with-doctor")
 async def chat_with_doctor(request: ChatRequest):
+    """AI doctor chat endpoint"""
     try:
-        if not request.message.strip():
-            raise HTTPException(status_code=400, detail="Message required")
-        
         response = simulate_doctor_response(request.message)
-        return {"response": response}
+        
+        # Store in memory
+        if request.user_id not in in_memory_db:
+            in_memory_db[request.user_id] = {"chat_history": []}
+        
+        in_memory_db[request.user_id]["chat_history"].append({
+            "message": request.message,
+            "response": response["response"],
+            "timestamp": datetime.datetime.now().isoformat()
+        })
+        
+        return {
+            "status": "success",
+            "response": response["response"],
+            "confidence": response["confidence"],
+            "disclaimer": response["disclaimer"]
+        }
     except Exception as e:
-        logger.error(f"Chat failed: {e}")
+        logger.error(f"Doctor chat failed: {e}")
         raise HTTPException(status_code=500, detail="Chat failed")
+
+@app.post("/api/analyze-prescription")
+async def analyze_prescription(request: PrescriptionAnalysisRequest):
+    """AI prescription analysis endpoint"""
+    try:
+        analysis = simulate_prescription_analysis(request.image_data)
+        
+        # Store in memory
+        if request.user_id not in in_memory_db:
+            in_memory_db[request.user_id] = {"prescription_history": []}
+        
+        in_memory_db[request.user_id]["prescription_history"].append({
+            "analysis": analysis,
+            "timestamp": datetime.datetime.now().isoformat()
+        })
+        
+        return {
+            "status": "success",
+            "analysis": analysis
+        }
+    except Exception as e:
+        logger.error(f"Prescription analysis failed: {e}")
+        raise HTTPException(status_code=500, detail="Analysis failed")
 
 @app.post("/api/vital-signs")
 async def record_vital_signs(request: VitalSignsRequest):
